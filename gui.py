@@ -37,6 +37,7 @@ class ExpertSystemGUI:
 
         question_text = question_fact["text"]
         answers = question_fact["answers"]
+        self.current_fact_name = question_fact["fact-name"]
         print(f"Text for the label: {question_text}")
         print(f"Text for the buttons: {answers}")
         #Remove the fact (no longer needed):
@@ -52,7 +53,7 @@ class ExpertSystemGUI:
     def submit_answer(self, answer):
         print("In submit_answer method")
         #Assert the selected answer as fact:
-        self.environment.assert_string(f"(age {answer})") #This asserts fact called age - of course it should assert different type of fact for each question.
+        self.environment.assert_string(f"({self.current_fact_name} {answer})") #This asserts fact called age - of course it should assert different type of fact for each question.
 
         #Run the environment and update the GUI:
         self.environment.run()
