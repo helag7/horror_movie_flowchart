@@ -37,17 +37,18 @@ class ExpertSystemGUI:
 
         question_text = question_fact["text"]
         answers = question_fact["answers"]
+        answers_text = question_fact["answers-text"]
         self.current_fact_name = question_fact["fact-name"]
         print(f"Text for the label: {question_text}")
-        print(f"Text for the buttons: {answers}")
+        print(f"Text for the buttons: {answers_text}")
         #Remove the fact (no longer needed):
         question_fact.retract()
         #Update label:
         self.label.config(text=question_text)
 
         #Create buttons for answers:
-        for answer in answers:
-            button = tk.Button(self.button_frame, text=answer, command=lambda a=answer: self.submit_answer(a))
+        for i, answer_text in enumerate(answers_text):
+            button = tk.Button(self.button_frame, text=answer_text, command=lambda a=answers[i]: self.submit_answer(a))
             button.pack(side=tk.LEFT)
     
     def submit_answer(self, answer):
