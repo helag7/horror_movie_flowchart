@@ -1,5 +1,3 @@
-; dane o horrorach
-
 (defrule twilight
 (age under18)
 (gender female)
