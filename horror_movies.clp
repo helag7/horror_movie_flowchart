@@ -1,11 +1,5 @@
 ; dane o horrorach
 
-(defrule male-or-female
-(age under18)
-=>
-(assert (question ???))
-)
-
 (defrule twilight
 (age under18)
 (gender female)
