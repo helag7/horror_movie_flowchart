@@ -248,7 +248,7 @@
 (age over18)
 (dead-or-living dead)
 (body yes)
-(dogs-up mail)
+(dogs-up mall)
 =>
 (assert (movie Dawn of the Dead)))
 
