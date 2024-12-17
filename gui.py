@@ -1,6 +1,3 @@
-'''
-This file contains the class responsible for creating GUI
-'''
 import tkinter as tk
 
 class ExpertSystemGUI:
@@ -19,13 +16,12 @@ class ExpertSystemGUI:
 
         self.display_next_question()
     
-    def display_next_question(self): #At the end of this method, the program hangs up and waits for the user to click a button
+    def display_next_question(self):
         print("Display next question called")
-        #Clear previous buttons:
+       
         for widget in self.button_frame.winfo_children():
             widget.destroy()
         
-        #Find the current question: - there's only one fact of template question at a time in the base of facts.
         question_fact = None
         for fact in self.environment.facts():
             if fact.template.name == "question":
@@ -33,7 +29,18 @@ class ExpertSystemGUI:
                 break
 
         if not question_fact:
-            self.label.config(text="No more questions.")
+            movie_fact = None
+            for fact in self.environment.facts():
+                if fact.template.name == "movie":
+                    movie_fact = fact
+                    break
+            
+            if movie_fact:
+                movie_title = movie_fact["title"]
+                self.label.config(text=f"You should watch '{movie_title}'")
+            else:
+                self.label.config(text="No movie found.")
+            return  
 
         question_text = question_fact["text"]
         answers = question_fact["answers"]
@@ -41,22 +48,18 @@ class ExpertSystemGUI:
         self.current_fact_name = question_fact["fact-name"]
         print(f"Text for the label: {question_text}")
         print(f"Text for the buttons: {answers_text}")
-        #Remove the fact (no longer needed):
+       
         question_fact.retract()
-        #Update label:
+
         self.label.config(text=question_text)
 
-        #Create buttons for answers:
         for i, answer_text in enumerate(answers_text):
             button = tk.Button(self.button_frame, text=answer_text, command=lambda a=answers[i]: self.submit_answer(a))
             button.pack(side=tk.LEFT)
     
     def submit_answer(self, answer):
         print("In submit_answer method")
-        #Assert the selected answer as fact:
-        self.environment.assert_string(f"({self.current_fact_name} {answer})") #This asserts fact called age - of course it should assert different type of fact for each question.
+        self.environment.assert_string(f"({self.current_fact_name} {answer})")
 
-        #Run the environment and update the GUI:
         self.environment.run()
-
         self.display_next_question()
