@@ -6,7 +6,7 @@ class ExpertSystemGUI:
         self.root = root
         self.environment = environment
 
-        self.root.geometry("300x200")
+        self.root.geometry("600x400")
 
         self.label = tk.Label(root, text="")
         self.label.pack()
@@ -55,7 +55,7 @@ class ExpertSystemGUI:
 
         for i, answer_text in enumerate(answers_text):
             button = tk.Button(self.button_frame, text=answer_text, command=lambda a=answers[i]: self.submit_answer(a))
-            button.pack(side=tk.LEFT)
+            button.pack()
     
     def submit_answer(self, answer):
         print("In submit_answer method")
