@@ -4,3 +4,6 @@
 (multislot answers (type SYMBOL))
 (multislot answers-text (type STRING))
 )
+
+(deftemplate movie
+(slot title (type STRING)))
