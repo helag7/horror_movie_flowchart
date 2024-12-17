@@ -14,10 +14,11 @@
 (defrule frightened-of
 (age over18)
 =>
-(assert (question (text "Are you more frightened of the dead or thw living?") 
+(assert (question (text "Are you more frightened of the dead or the living?") 
 (fact-name dead-or-living) (answers living crawl no-devil dead both)
 (answers-text "Have you seen the news lately? The living, no matter what planet they're from"
-"Things that crawl scare me more than anyting else" "I'm frightened of the dead"
+"Things that crawl scare me more than anyting else" 
+"I don't care as long as the devil isn't involved" "I'm frightened of the dead"
 "I'm most afraid of anything that's a little bit of both"))))
 
 (defrule is-catholic
